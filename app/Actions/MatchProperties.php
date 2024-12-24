@@ -2,6 +2,10 @@
 
 namespace App\Actions;
 
+use Homeful\Borrower\Exceptions\{MaximumBorrowingAgeBreached, MinimumBorrowingAgeNotMet};
+use Brick\Math\Exception\{NumberFormatException, RoundingNecessaryException};
+use Homeful\Payment\Exceptions\{MaxCycleBreached, MinTermBreached};
+use Brick\Money\Exception\UnknownCurrencyException;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Homeful\Common\Classes\Amount;
 use Homeful\Borrower\Borrower;
@@ -13,6 +17,15 @@ class MatchProperties
 {
     use AsAction;
 
+    /**
+     * @throws MaximumBorrowingAgeBreached
+     * @throws RoundingNecessaryException
+     * @throws MinimumBorrowingAgeNotMet
+     * @throws UnknownCurrencyException
+     * @throws NumberFormatException
+     * @throws MaxCycleBreached
+     * @throws MinTermBreached
+     */
     public function handle(array $validated): MatchData
     {
         $borrower = (new Borrower)
@@ -24,11 +37,16 @@ class MatchProperties
         $properties = GetProperties::run();
         foreach ($properties as $property) {
             $mortgage = new Mortgage($property, $borrower, []);
-            if ($mortgage->getLoanDifference()->compareTo(0) == Amount::LESS_THAN)
+            if ($this->match($mortgage))
                 $mortgages[] = $mortgage;
         }
         $mortgages = ['mortgages' => $mortgages];
 
         return MatchData::from($mortgages);
+    }
+
+    protected function match(Mortgage $mortgage): bool
+    {
+        return $mortgage->getJointBorrowerDisposableMonthlyIncome()->compareTo($mortgage->getLoan()->getMonthlyAmortization()) == Amount::GREATER_THAN;
     }
 }

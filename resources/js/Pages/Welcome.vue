@@ -31,8 +31,8 @@ function handleImageError() {
 }
 
 const form = useForm({
-    date_of_birth: '1970-04-21',
-    monthly_gross_income: 12500,
+    date_of_birth: '1999-03-17',
+    monthly_gross_income: 50000,
     region: "NCR"
 });
 
