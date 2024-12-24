@@ -4,7 +4,6 @@ namespace App\Actions;
 
 use Homeful\Borrower\Exceptions\{MaximumBorrowingAgeBreached, MinimumBorrowingAgeNotMet};
 use Brick\Math\Exception\{NumberFormatException, RoundingNecessaryException};
-use Homeful\Payment\Exceptions\{MaxCycleBreached, MinTermBreached};
 use Brick\Money\Exception\UnknownCurrencyException;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Homeful\Common\Classes\Amount;
@@ -23,15 +22,13 @@ class MatchProperties
      * @throws MinimumBorrowingAgeNotMet
      * @throws UnknownCurrencyException
      * @throws NumberFormatException
-     * @throws MaxCycleBreached
-     * @throws MinTermBreached
      */
     public function handle(array $validated): MatchData
     {
         $borrower = (new Borrower)
             ->setBirthdate(Carbon::parse($validated['date_of_birth']))
             ->setGrossMonthlyIncome($validated['monthly_gross_income'])
-            ->setRegional($validated['monthly_gross_income'] != 'NCR');
+            ->setRegional($validated['region'] != 'NCR');
 
         $mortgages = [];
         $properties = GetProperties::run();
