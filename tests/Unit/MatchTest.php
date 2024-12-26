@@ -1,20 +1,11 @@
 <?php
 
-
-use App\Http\Requests\MatchRequest;
-use Brick\Math\RoundingMode;
+use Homeful\Property\Enums\MarketSegment;
+use Homeful\Common\Enums\WorkArea;
 use Homeful\Borrower\Borrower;
-use Homeful\Common\Classes\{Assert, Input};
-use Brick\Money\Money;
-use Homeful\Mortgage\Data\MortgageData;
 use Homeful\Property\Property;
 use Illuminate\Support\Carbon;
-use Whitecube\Price\Price;
 use Homeful\Mortgage\Mortgage;
-use Homeful\Payment\Payment;
-use Homeful\Payment\Class\Term;
-use Homeful\Common\Enums\WorkArea;
-use Homeful\Property\Enums\MarketSegment;
 
 test('that true is true', function () {
 

@@ -2,14 +2,8 @@
 
 namespace App\Actions;
 
-use Brick\Math\Exception\MathException;
-use Brick\Math\Exception\NumberFormatException;
-use Brick\Math\Exception\RoundingNecessaryException;
-use Brick\Money\Exception\MoneyMismatchException;
-use Brick\Money\Exception\UnknownCurrencyException;
-use Illuminate\Support\Facades\{Cache, Http};
-use Homeful\Property\Exceptions\MaximumContractPriceBreached;
 use Homeful\Property\Exceptions\MinimumContractPriceBreached;
+use Illuminate\Support\Facades\{Cache, Http};
 use Lorisleiva\Actions\Concerns\AsAction;
 use Homeful\Property\Property;
 
@@ -19,7 +13,6 @@ class GetProperties
 
     public function handle()
     {
-
         return Cache::remember('properties', now()->addMinutes(5), function() {
             logger('properties');
             logger(now());
