@@ -54,6 +54,9 @@ class MatchProducts
         return MatchData::from($matches)->only(...$this->getFilter());
     }
 
+    /**
+     * @return array[]
+     */
     public function rules(): array
     {
         return [
@@ -75,24 +78,58 @@ class MatchProducts
         $this->data = $this->handle($request->validated());
     }
 
+    /**
+     * The controller returns the
+     * filtered resultant data
+     * via Inertia messaging.
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function htmlResponse(): \Illuminate\Http\RedirectResponse
     {
         return back()->with('event', [
             'name' => 'match',
-            'data' => $this->data,
+            'data' => $this->transform($this->data),
         ]);
     }
 
-    public function jsonResponse(): MatchData
+    /**
+     * The controller returns a json response
+     * if the source requests for a json.
+     *
+     * @return array
+     */
+    public function jsonResponse(): array
     {
-        return $this->data;
+        return $this->transform($this->data);
     }
 
+    /**
+     * This is the matching algorithm. it compares the monthly
+     * amortization of the specific product against the joint
+     * disposable monthly income of the borrower - to check
+     * if the borrower can afford the unit.
+     *
+     * @param Mortgage $mortgage
+     * @return bool
+     * @throws NumberFormatException
+     * @throws RoundingNecessaryException
+     * @throws UnknownCurrencyException
+     * @throws \Homeful\Payment\Exceptions\MaxCycleBreached
+     * @throws \Homeful\Payment\Exceptions\MinTermBreached
+     */
     protected function match(Mortgage $mortgage): bool
     {
         return $mortgage->getJointBorrowerDisposableMonthlyIncome()->compareTo($mortgage->getLoan()->getMonthlyAmortization()) == Amount::GREATER_THAN;
     }
 
+    /**
+     * This is a list of fields that
+     * are exposed by the results
+     * of the matching.
+     *
+     * @return string[]
+     */
     protected function getFilter(): array
     {
         return [
@@ -121,5 +158,23 @@ class MatchProducts
             'matches.present_value_from_monthly_disposable_income',
             'matches.loan_difference'
         ];
+    }
+
+    /**
+     * This function processes the data
+     * to return the desired output
+     * i.e., just the product sku.
+     *
+     * @param MatchData $data
+     * @return array
+     */
+    protected function transform(MatchData $data): array
+    {
+        $response = [];
+        foreach ($data->matches->toArray() as $record) {
+            $response [] = $record['property']['sku'];
+        };
+
+        return $response;
     }
 }
