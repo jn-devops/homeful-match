@@ -10,6 +10,6 @@ class MatchData extends Data
 {
     public function __construct(
         /** @var MortgageData[] */
-        public ?DataCollection $mortgages,
+        public ?DataCollection $matches,
     ) {}
 }

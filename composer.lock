@@ -2542,16 +2542,16 @@
         },
         {
             "name": "jn-devops/property",
-            "version": "v1.1.7",
+            "version": "v1.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/jn-devops/property.git",
-                "reference": "7a4aa484d2aef5a90fcc2b5ff2db851339d50259"
+                "reference": "6d9f97c12352f66a8e154f08d6bd96c287392703"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/jn-devops/property/zipball/7a4aa484d2aef5a90fcc2b5ff2db851339d50259",
-                "reference": "7a4aa484d2aef5a90fcc2b5ff2db851339d50259",
+                "url": "https://api.github.com/repos/jn-devops/property/zipball/6d9f97c12352f66a8e154f08d6bd96c287392703",
+                "reference": "6d9f97c12352f66a8e154f08d6bd96c287392703",
                 "shasum": ""
             },
             "require": {
@@ -2612,7 +2612,7 @@
             ],
             "support": {
                 "issues": "https://github.com/jn-devops/property/issues",
-                "source": "https://github.com/jn-devops/property/tree/v1.1.7"
+                "source": "https://github.com/jn-devops/property/tree/v1.1.8"
             },
             "funding": [
                 {
@@ -2620,7 +2620,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-12-24T00:13:17+00:00"
+            "time": "2024-12-25T23:44:18+00:00"
         },
         {
             "name": "kelunik/certificate",
