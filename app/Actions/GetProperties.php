@@ -13,7 +13,7 @@ class GetProperties
 
     public function handle()
     {
-        return Cache::remember('properties', now()->addMinutes(5), function() {
+        return Cache::remember('properties', now()->addMinutes(config('homeful-match.cache.ttl')), function() {
             logger('properties');
             logger(now());
             $response = Http::get('https://properties.homeful.ph/fetch-products');

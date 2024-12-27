@@ -37,7 +37,7 @@ class MatchProducts
         $properties = GetProperties::run();
 
         $key = $validated['date_of_birth'] . '_' . $validated['monthly_gross_income'] . '_' . $validated['region'];
-        $mortgages = Cache::remember($key, now()->addMinutes(5), function() use ($properties, $borrower, $key) {
+        $mortgages = Cache::remember($key, now()->addMinutes(config('homeful-match.cache.ttl')), function() use ($properties, $borrower, $key) {
             logger($key);
             logger(now());
             $mortgages = [];
@@ -170,9 +170,13 @@ class MatchProducts
      */
     protected function transform(MatchData $data): array
     {
+        $limit = config('homeful-match.matches.limit', 10000); $i = 0;
         $response = [];
         foreach ($data->matches->toArray() as $record) {
             $response [] = $record['property']['sku'];
+            $i++;
+            if ($i == $limit)
+                break;
         };
 
         return $response;

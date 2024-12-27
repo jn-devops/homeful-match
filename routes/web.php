@@ -4,15 +4,18 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Actions\MatchProducts;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
 
+Route::get('/', function (Request $request) {
+    session($request->only('callback'));
 
-Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'callback' => $request->get('callback', config('homeful-match.callback')),
     ]);
 });
 

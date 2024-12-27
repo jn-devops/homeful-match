@@ -2,11 +2,12 @@
 import {Head, Link, useForm, usePage} from '@inertiajs/vue3';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
-import TextInput from '@/Components/TextInput.vue';
 import InputError from "@/Components/InputError.vue";
+import TextInput from '@/Components/TextInput.vue';
+import queryString from 'query-string';
 import { ref, watch } from 'vue';
 
-defineProps({
+const props = defineProps({
     canLogin: {
         type: Boolean,
     },
@@ -21,6 +22,7 @@ defineProps({
         type: String,
         required: true,
     },
+    callback: String,
 });
 
 function handleImageError() {
@@ -36,13 +38,6 @@ const form = useForm({
     region: "NCR"
 });
 
-const match = () => {
-    form.post(route('match'), {
-        errorBag: 'match',
-        preserveScroll: true,
-    });
-};
-
 const loan_data = ref({});
 
 watch (
@@ -57,6 +52,23 @@ watch (
     },
     { immediate: true }
 );
+
+const loan_data_query_string = () => {
+    const query = queryString.stringify({ sku: loan_data?.value }, { arrayFormat: 'bracket' });
+    return props.callback && query ? `${props.callback}?${query}` : '';
+};
+
+const match = () => {
+    form.post(route('match'), {
+        errorBag: 'match',
+        preserveScroll: true,
+        onSuccess: (response) => {
+            if (props.callback) {
+                window.location.href = loan_data_query_string();
+            }
+        },
+    });
+};
 
 </script>
 

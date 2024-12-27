@@ -1,6 +1,10 @@
 ## About Homeful Match
 
 ## Usage
+#### Normal
+https://match.homeful.ph
+#### w/ callback
+https://match.homeful.ph/?callback=https://google.com
 ## API
 ### Match Products
 GET https://match.homeful.ph/api/match
