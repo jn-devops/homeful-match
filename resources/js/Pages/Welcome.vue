@@ -22,6 +22,10 @@ const props = defineProps({
         type: String,
         required: true,
     },
+    mortgageVersion: {
+        type: String,
+        required: true,
+    },
     callback: String,
 });
 
@@ -189,7 +193,7 @@ const match = () => {
                 <footer
                     class="py-16 text-center text-sm text-black dark:text-white/70"
                 >
-                    Homeful Match v1.0
+                    jn-devops/mortgage {{ mortgageVersion }}
                 </footer>
             </div>
         </div>

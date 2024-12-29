@@ -15,6 +15,7 @@ Route::get('/', function (Request $request) {
         'canRegister' => Route::has('register'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
+        'mortgageVersion' => \Composer\InstalledVersions::getVersion('jn-devops/mortgage'),
         'callback' => $request->get('callback', config('homeful-match.callback')),
     ]);
 });
