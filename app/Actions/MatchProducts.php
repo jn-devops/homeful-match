@@ -12,6 +12,7 @@ use Homeful\Common\Classes\Amount;
 use Homeful\Borrower\Borrower;
 use Illuminate\Support\Carbon;
 use Homeful\Mortgage\Mortgage;
+use Illuminate\Support\Arr;
 use App\Data\MatchData;
 
 class MatchProducts
@@ -19,6 +20,9 @@ class MatchProducts
     use AsAction;
 
     protected MatchData $data;
+
+    protected int $limit;
+    protected int $verbose;
 
     /**
      * @throws MaximumBorrowingAgeBreached
@@ -63,6 +67,8 @@ class MatchProducts
             'date_of_birth' => ['required', 'date'],
             'monthly_gross_income' => ['required', 'numeric', 'min:0'],
             'region' => ['required', 'string', 'max:100'],
+            'limit' => ['nullable', 'int', 'min:1'],
+            'verbose' => ['nullable', 'int', 'min:0', 'max:2'],
         ];
     }
 
@@ -75,7 +81,10 @@ class MatchProducts
      */
     public function asController(ActionRequest $request): void
     {
-        $this->data = $this->handle($request->validated());
+        $validated = $request->validated();
+        $this->limit = Arr::pull($validated, 'limit', config('homeful-match.matches.limit', 10000));
+        $this->verbose = Arr::pull($validated, 'verbose', config('homeful-match.matches.verbose', 0));
+        $this->data = $this->handle($validated);
     }
 
     /**
@@ -89,7 +98,7 @@ class MatchProducts
     {
         return back()->with('event', [
             'name' => 'match',
-            'data' => $this->transform($this->data),
+            'data' => $this->transform($this->data, $this->limit, $this->verbose),
         ]);
     }
 
@@ -101,7 +110,7 @@ class MatchProducts
      */
     public function jsonResponse(): array
     {
-        return $this->transform($this->data);
+        return $this->transform($this->data, $this->limit, $this->verbose);
     }
 
     /**
@@ -166,14 +175,20 @@ class MatchProducts
      * i.e., just the product sku.
      *
      * @param MatchData $data
+     * @param int $limit
+     * @param int $verbose
      * @return array
      */
-    protected function transform(MatchData $data): array
+    protected function transform(MatchData $data, int $limit, int $verbose): array
     {
-        $limit = config('homeful-match.matches.limit', 10000); $i = 0;
+        $i = 0;
         $response = [];
         foreach ($data->matches->toArray() as $record) {
-            $response [] = $record['property']['sku'];
+            $response [] = match ($verbose) {
+                0 => $record['property']['sku'],
+                1 => $record['property'],
+                default => $record
+            };
             $i++;
             if ($i == $limit)
                 break;
