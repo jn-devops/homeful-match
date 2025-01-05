@@ -22,6 +22,9 @@ class GetProperties
                 try {
                     $properties [] = (new Property)
                         ->setSKU($record['sku'])
+                        ->setName($record['name'])
+                        ->setBrand($record['brand'])
+                        ->setCategory($record['category'])
                         ->setTotalContractPrice($record['price'])
                         ->setAppraisedValue($record['appraised_value'])
                         ->setPercentDownPayment($record['percent_down_payment'])
