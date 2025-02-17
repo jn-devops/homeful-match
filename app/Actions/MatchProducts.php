@@ -36,17 +36,19 @@ class MatchProducts
         $borrower = (new Borrower)
             ->setBirthdate(Carbon::parse($validated['date_of_birth']))
             ->setGrossMonthlyIncome($validated['monthly_gross_income'])
+            ->setOverrideMaximumPayingAge(config('homeful-match.override_maximum_paying_age'))
             ->setRegional($validated['region'] != 'NCR');
 
         $properties = GetProperties::run();
 
         $key = $validated['date_of_birth'] . '_' . $validated['monthly_gross_income'] . '_' . $validated['region'];
-        $mortgages = Cache::remember($key, now()->addMinutes(config('homeful-match.cache.ttl')), function() use ($properties, $borrower, $key) {
+        $params = config('homeful-match.params');
+        $mortgages = Cache::remember($key, now()->addMinutes(config('homeful-match.cache.ttl')), function() use ($properties, $borrower, $key, $params) {
             logger($key);
             logger(now());
             $mortgages = [];
             foreach ($properties as $property) {
-                $mortgage = new Mortgage($property, $borrower, []);
+                $mortgage = new Mortgage($property, $borrower, $params);
                 if ($this->match($mortgage))
                     $mortgages[] = $mortgage;
             }

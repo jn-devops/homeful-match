@@ -28,7 +28,7 @@ class GetProperties
                         ->setTotalContractPrice($record['price'])
                         ->setAppraisedValue($record['appraised_value'])
                         ->setPercentDownPayment($record['percent_down_payment'])
-                        ->setDownPaymentTerm($record['down_payment_term'])
+                        ->setDownPaymentTerm($record['down_payment_term'] == 0 ? 1 : $record['down_payment_term']) //TODO: make this more elegant
                         ->setPercentMiscellaneousFees($record['percent_miscellaneous_fees'])
                     ;
                 }
