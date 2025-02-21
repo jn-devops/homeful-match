@@ -49,7 +49,7 @@ const formatNumber = (value) => {
 
 </script>
 <template>
-    <div class="w-full px-5 md:px-20 py-10 bg-gray-100">
+    <div class="w-full min-h-screen px-5 md:px-20 py-10 bg-gray-100">
         <h6>Let's Calculate</h6>
         <h1 class="font-bold text-2xl">Home Match Calculator</h1>
         <form @submit.prevent="submit">
@@ -58,83 +58,85 @@ const formatNumber = (value) => {
                 <div class="basis-1/2 w-full p-5 bg-white rounded-xl shadow-xl">
                     <h2 class="text-base/7 font-semibold text-gray-900 leading-none">Input</h2>
                     <p class="mt-1 text-sm/6 text-gray-600 leading-none mb-5">Provide the required information below.</p>
-                    <Input 
-                        v-model="form.tcp"
-                        label="TCP"
-                        placeholder="Enter TCP"
-                        :error-message="form.errors.tcp"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.gmi"
-                        label="Gross Monthly Income"
-                        placeholder="Enter Gross Monthly Income"
-                        :error-message="form.errors.gmi"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.percent_dp"
-                        label="Gross Monthly Income"
-                        placeholder="Enter Gross Monthly Income"
-                        :error-message="form.errors.percent_dp"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.dp_term"
-                        label="Downpayment Term (months)"
-                        placeholder="Enter Downpayment Term"
-                        :error-message="form.errors.dp_term"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.percent_mf"
-                        label="Percent Miscellaneous Fee"
-                        placeholder="Enter Percent Miscellaneous Fee"
-                        :error-message="form.errors.percent_mf"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.gmi_percent"
-                        label="GMI Percent"
-                        placeholder="Enter GMI Percent"
-                        :error-message="form.errors.gmi_percent"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.bp_term"
-                        label="Balance Payment Term (years)"
-                        placeholder="Enter Balance Payment Term"
-                        :error-message="form.errors.bp_term"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.processing_fee"
-                        label="Processing Fee"
-                        placeholder="Enter Processing Fee"
-                        :error-message="form.errors.processing_fee"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.consultation_fee"
-                        label="Consultation Fee"
-                        placeholder="Enter Consultation Fee"
-                        :error-message="form.errors.consultation_fee"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.mri"
-                        label="MRI"
-                        placeholder="Enter MRI"
-                        :error-message="form.errors.mri"
-                        type="number"
-                    />
-                    <Input 
-                        v-model="form.fi"
-                        label="Fire Insurence"
-                        placeholder="Enter Fire Insurence"
-                        :error-message="form.errors.fi"
-                        type="number"
-                    />
+                    <div class="lg:grid lg:grid-cols-2 lg:gap-3 mb-5">
+                        <Input 
+                            v-model="form.tcp"
+                            label="TCP"
+                            placeholder="Enter TCP"
+                            :error-message="form.errors.tcp"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.gmi"
+                            label="Gross Monthly Income"
+                            placeholder="Enter Gross Monthly Income"
+                            :error-message="form.errors.gmi"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.percent_dp"
+                            label="Gross Monthly Income"
+                            placeholder="Enter Gross Monthly Income"
+                            :error-message="form.errors.percent_dp"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.dp_term"
+                            label="Downpayment Term (months)"
+                            placeholder="Enter Downpayment Term"
+                            :error-message="form.errors.dp_term"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.percent_mf"
+                            label="Percent Miscellaneous Fee"
+                            placeholder="Enter Percent Miscellaneous Fee"
+                            :error-message="form.errors.percent_mf"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.gmi_percent"
+                            label="GMI Percent"
+                            placeholder="Enter GMI Percent"
+                            :error-message="form.errors.gmi_percent"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.bp_term"
+                            label="Balance Payment Term (years)"
+                            placeholder="Enter Balance Payment Term"
+                            :error-message="form.errors.bp_term"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.processing_fee"
+                            label="Processing Fee"
+                            placeholder="Enter Processing Fee"
+                            :error-message="form.errors.processing_fee"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.consultation_fee"
+                            label="Consultation Fee"
+                            placeholder="Enter Consultation Fee"
+                            :error-message="form.errors.consultation_fee"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.mri"
+                            label="MRI"
+                            placeholder="Enter MRI"
+                            :error-message="form.errors.mri"
+                            type="number"
+                        />
+                        <Input 
+                            v-model="form.fi"
+                            label="Fire Insurence"
+                            placeholder="Enter Fire Insurence"
+                            :error-message="form.errors.fi"
+                            type="number"
+                        />
+                    </div>
                     <DefaultButton>Calculate</DefaultButton>
                 </div>
                 <div ref="computedDiv" tabindex="-1" class="basis-1/2 w-full h-fit p-5 bg-white rounded-xl shadow-xl">

@@ -41,7 +41,7 @@ const updateInput = (newVal) => {
 }
 </script>
 <template>
-    <div class="my-4">
+    <div class="my-2">
         <label for="email" class="block text-sm/6 font-medium text-gray-900">{{ label }}</label>
         <div :class="{'grid grid-cols-1' : errorMessage}">
           <input 
