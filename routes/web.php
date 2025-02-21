@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Actions\MatchProducts;
+use App\Http\Controllers\HomeMatchCalculatorController;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -31,5 +32,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('match', MatchProducts::class)->name('match');
+
+Route::get('calculator', [HomeMatchCalculatorController::class, 'index'])->name('match.calculator');
 
 require __DIR__.'/auth.php';
