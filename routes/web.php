@@ -34,5 +34,6 @@ Route::middleware('auth')->group(function () {
 Route::post('match', MatchProducts::class)->name('match');
 
 Route::get('calculator', [HomeMatchCalculatorController::class, 'index'])->name('match.calculator');
+Route::post('calculate', [HomeMatchCalculatorController::class, 'calculate'])->name('match.calculate');
 
 require __DIR__.'/auth.php';
