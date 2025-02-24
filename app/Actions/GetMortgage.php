@@ -58,6 +58,7 @@ class GetMortgage
             Input::PERCENT_MF => ['required', 'numeric'],
             Input::BP_TERM => ['required', 'integer'],
 
+            Input::INCOME_REQUIREMENT_MULTIPLIER => ['nullable', 'numeric'],
             Input::PROCESSING_FEE => ['nullable', 'numeric'],
             Input::MORTGAGE_REDEMPTION_INSURANCE => ['nullable', 'numeric'],
             Input::ANNUAL_FIRE_INSURANCE => ['nullable', 'numeric'],
