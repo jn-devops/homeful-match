@@ -19,6 +19,7 @@
         "vue": "^3.4.0"
     },
     "dependencies": {
+        "@headlessui/vue": "^1.7.23",
         "@heroicons/vue": "^2.2.0",
         "nprogress": "^0.2.0",
         "query-string": "^9.1.1"

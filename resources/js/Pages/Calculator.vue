@@ -1,8 +1,9 @@
 <script setup>
-import {useForm, usePage} from '@inertiajs/vue3';
+import {Head, useForm, usePage} from '@inertiajs/vue3';
 import Input from '@/Input/Input.vue';
 import DefaultButton from '@/Buttons/DefaultButton.vue';
 import {ref, watch} from 'vue';
+import ToggleInput from '@/Input/ToggleInput.vue';
 
 const form = useForm({
     age: 30,
@@ -89,6 +90,7 @@ const formatNumber = (value) => {
 
 </script>
 <template>
+    <Head title="Homeful Match Calculator" />
     <div class="w-full min-h-screen px-5 md:px-20 py-10 bg-gray-100">
         <h6>Let's Calculate</h6>
         <h1 class="font-bold text-2xl">Home Match Calculator</h1>
@@ -174,12 +176,10 @@ const formatNumber = (value) => {
                             type="number"
                             step="0.01"
                         />
-                        <Input
-                            v-model="form.mri_fi"
-                            label="With MRI/FI"
-                            placeholder="With MRI/FI"
-                            :error-message="form.errors.mri_fi"
-                            type="text"
+                        <ToggleInput 
+                             v-model="form.mri_fi"
+                             label="With MRI/FI"
+                             :error-message="form.errors.mri_fi"
                         />
                     </div>
                     <DefaultButton>Calculate</DefaultButton>
@@ -194,59 +194,59 @@ const formatNumber = (value) => {
                         </div>
                         <div class="mb-5">
                             <h3 class="font-semibold text-sm">Downpayment Amortization</h3>
-                            <div class="">{{ formatNumber(computedData.downpayment_amortization) }}</div>
+                            <div class="">₱ {{ formatNumber(computedData.downpayment_amortization) }}</div>
                         </div>
                         <div class="mb-5">
                           <h3 class="font-semibold text-sm">Downpayment Term</h3>
-                          <div class="">{{ formatNumber(computedData.downpayment_term) }}</div>
+                          <div class="">₱ {{ formatNumber(computedData.downpayment_term) }}</div>
                         </div>
                         <div class="mb-5">
                             <h3 class="font-semibold text-sm">Cash Out</h3>
-                            <div class="">{{ formatNumber(computedData.cash_out) }}</div>
+                            <div class="">₱ {{ formatNumber(computedData.cash_out) }}</div>
                         </div>
                         <div class="mb-5">
                             <h3 class="font-semibold text-sm">Loan Amortization</h3>
-                            <div class="">{{ formatNumber(computedData.loan_amortization) }}</div>
+                            <div class="">₱ {{ formatNumber(computedData.loan_amortization) }}</div>
                         </div>
                         <div class="mb-5">
                             <h3 class="font-semibold text-sm">Miscellaneous Fees</h3>
-                            <div class="">{{ formatNumber(computedData.miscellaneous_fees) }}</div>
+                            <div class="">₱ {{ formatNumber(computedData.miscellaneous_fees) }}</div>
                         </div>
                         <div class="mb-5">
                             <h3 class="font-semibold text-sm">Income Requirement</h3>
-                            <div class="">{{ formatNumber(computedData.income_requirement) }}</div>
+                            <div class="">₱ {{ formatNumber(computedData.income_requirement) }}</div>
                         </div>
                         <div class="mb-5">
                             <h3 class="font-semibold text-sm">Balance Payment</h3>
-                            <div class="">{{ formatNumber(computedData.balance_payment) }}</div>
+                            <div class="">₱ {{ formatNumber(computedData.balance_payment) }}</div>
                         </div>
                         <div class="mb-5">
                             <h3 class="font-semibold text-sm">Loan Value</h3>
-                            <div class="">{{ formatNumber(computedData.loan_value) }}</div>
+                            <div class="">₱ {{ formatNumber(computedData.loan_value) }}</div>
                         </div>
                         <div class="mb-5">
                           <h3 class="font-semibold text-sm">BP Term</h3>
-                          <div class="">{{ formatNumber(computedData.bp_term) }}</div>
+                          <div class="">{{ computedData.bp_term }}</div>
                         </div>
                         <div class="mb-5">
                           <h3 class="font-semibold text-sm">BP Interest Rate</h3>
-                          <div class="">{{ formatNumber(computedData.bp_interest_rate) }}</div>
+                          <div class="">{{ computedData.bp_interest_rate }}</div>
                         </div>
                         <div class="mb-5">
                           <h3 class="font-semibold text-sm">GMI Percent</h3>
-                          <div class="">{{ formatNumber(computedData.gmi_percent) }}</div>
+                          <div class="">{{ computedData.gmi_percent }}</div>
                         </div>
                         <div class="mb-5">
                           <h3 class="font-semibold text-sm">Loan Difference</h3>
-                          <div class="">{{ formatNumber(computedData.loan_difference) }}</div>
+                          <div class="">₱ {{ formatNumber(computedData.loan_difference) }}</div>
                         </div>
                         <div class="mb-5">
                           <h3 class="font-semibold text-sm">Disposable Income</h3>
-                          <div class="">{{ formatNumber(computedData.joint_disposable_monthly_income) }}</div>
+                          <div class="">₱ {{ formatNumber(computedData.joint_disposable_monthly_income) }}</div>
                         </div>
                         <div class="mb-5">
                           <h3 class="font-semibold text-sm">PV from Disposable Income</h3>
-                          <div class="">{{ formatNumber(computedData.present_value_from_monthly_disposable_income) }}</div>
+                          <div class="">₱ {{ formatNumber(computedData.present_value_from_monthly_disposable_income) }}</div>
                         </div>
                     </div>
                 </div>
