@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Actions\MatchProducts;
+use App\Actions\{GetMortgage, MatchProducts};
 use Illuminate\Http\Request;
 
 Route::get('/user', function (Request $request) {
@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('match', MatchProducts::class);
+Route::get('mortgage', GetMortgage::class)->name('mortgage');

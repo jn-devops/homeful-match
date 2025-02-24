@@ -60,6 +60,7 @@ function updateInput(event) {
         <div :class="{'grid grid-cols-1': errorMessage}">
             <input
                 :type="type"
+                v-bind="$attrs"
                 v-model="internalValue"
                 @input="updateInput"
                 :maxlength="max"

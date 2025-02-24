@@ -26,6 +26,7 @@ use Inertia\Response;
 use Spatie\LaravelData\Attributes\Validation\In;
 use Whitecube\Price\Price;
 use Homeful\Mortgage\Data\MortgageData;
+use App\Actions\GetMortgage;
 
 class HomeMatchCalculatorController extends Controller
 {
@@ -67,11 +68,12 @@ class HomeMatchCalculatorController extends Controller
         ])->validate();
 
         $params = [
+            'age' => $age = Arr::get($validated , 'age'),
             Input::TCP => $tcp = Arr::get($validated , 'tcp'),
             Input::WAGES => $gmi = Arr::get($validated , 'gmi'),
             Input::PERCENT_DP => $percent_dp = Arr::get($validated , 'percent_dp')/100,
             Input::DP_TERM => $dp_term = Arr::get($validated , 'dp_term'),
-//            Input::BP_INTEREST_RATE => $interest_rate = Arr::get($validated , 'interest_rate')/100,
+//            Input::BP_INTEREST_RATE => $interest_rate = Arr::get($validated , 'interest_rate'),
             Input::PERCENT_MF => $percent_mf = Arr::get($validated , 'percent_mf')/100,
             Input::BP_TERM => $bp_term = Arr::get($validated , 'bp_term'),
             Input::PROCESSING_FEE => $processing_fee = Arr::get($validated , 'processing_fee'),
@@ -81,7 +83,7 @@ class HomeMatchCalculatorController extends Controller
             ->setTotalContractPrice(new Price(Money::of($tcp, 'PHP')))
             ->setAppraisedValue(new Price(Money::of($tcp, 'PHP')));
 
-        $age = Arr::get($validated, 'age');
+//        $age = Arr::get($validated, 'age');
         $borrower = (new Borrower($property))
             ->setAge($age)
             ->setRegional(false)
@@ -104,21 +106,19 @@ class HomeMatchCalculatorController extends Controller
 
         $gmi_percent = Arr::get($validated, 'gmi_percent');
         if ($gmi_percent) {
-            $params = array_merge($validated, [
+            $params = array_merge($params, [
                 Input::INCOME_REQUIREMENT_MULTIPLIER => $gmi_percent/100
             ]);
         }
+
         $interest_rate = Arr::get($validated, 'interest_rate');
         if ($interest_rate) {
-            $params = array_merge($validated, [
+            $params = array_merge($params, [
                 Input::BP_INTEREST_RATE => $interest_rate/100
             ]);
         }
 
-
-        $mortgage = new Mortgage(property: $property, borrower: $borrower, params: $params);
-
-        $data = MortgageData::fromObject($mortgage);
+        $data = GetMortgage::run($params);
 
         return back()->with('event', [
             'name' => 'calculated',

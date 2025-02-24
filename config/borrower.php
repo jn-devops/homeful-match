@@ -10,10 +10,10 @@ return [
             'borrowing_age' => [
                 'minimum' => 18,
                 'maximum' => 60,
-                'offset' => 0,
+                'offset' => -1,
             ],
             'maximum_term' => 30,
-            'maximum_paying_age' => 70
+            'maximum_paying_age' => 65
         ],
         'rcbc' => [
             'name' => 'Rizal Commercial Banking Corporation',

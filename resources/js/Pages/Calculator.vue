@@ -127,6 +127,7 @@ const formatNumber = (value) => {
                             placeholder="Enter Gross Monthly Income"
                             :error-message="form.errors.percent_dp"
                             type="number"
+                            step="0.01"
                         />
                         <Input
                             v-model="form.dp_term"
@@ -141,6 +142,7 @@ const formatNumber = (value) => {
                             placeholder="Enter Percent Miscellaneous Fee"
                             :error-message="form.errors.percent_mf"
                             type="number"
+                            step="0.01"
                         />
                         <Input
                             v-model="form.gmi_percent"
@@ -148,6 +150,7 @@ const formatNumber = (value) => {
                             placeholder="Enter GMI Percent"
                             :error-message="form.errors.gmi_percent"
                             type="number"
+                            step="0.01"
                         />
                         <Input
                             v-model="form.bp_term"
@@ -169,6 +172,7 @@ const formatNumber = (value) => {
                             placeholder="Enter Interest Rate"
                             :error-message="form.errors.interest_rate"
                             type="number"
+                            step="0.01"
                         />
                         <Input
                             v-model="form.mri_fi"
