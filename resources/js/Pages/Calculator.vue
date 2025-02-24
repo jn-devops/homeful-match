@@ -94,7 +94,6 @@ const formatNumber = (value) => {
     <div class="w-full min-h-screen px-5 md:px-20 py-10 bg-gray-100">
         <h6>Let's Calculate</h6>
         <h1 class="font-bold text-2xl">Home Match Calculator</h1>
-        {{ calculated_data }}
         <form @submit.prevent="submit">
 
             <div class="flex flex-col-reverse lg:flex-row  gap-4 mt-10">
