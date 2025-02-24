@@ -37,7 +37,7 @@ const computedData = ref({
     present_value_from_monthly_disposable_income: null
 })
 
-const computedDiv = ref()
+const computedDiv = ref(null)
 
 const calculated_data = ref({});
 
@@ -73,8 +73,9 @@ watch(
 const submit = () => {
     form.post(route('match.calculate'), {
         onFinish: () => form.reset(),
+        preserveScroll: true,
     });
-    // // Focusing on the Computed Div. This can be use after form onSuccess.
+    // Focusing on the Computed Div. This can be use after form onSuccess.
     // computedDiv.value.scrollIntoView({ behavior: 'smooth', block: 'center' });
     // setTimeout(() => {
     //   computedDiv.value.focus();
@@ -197,7 +198,7 @@ const formatNumber = (value) => {
                         </div>
                         <div class="mb-5">
                           <h3 class="font-semibold text-sm">Downpayment Term</h3>
-                          <div class="">₱ {{ formatNumber(computedData.downpayment_term) }}</div>
+                          <div class=""> {{ computedData.downpayment_term }}</div>
                         </div>
                         <div class="mb-5">
                             <h3 class="font-semibold text-sm">Cash Out</h3>
