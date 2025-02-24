@@ -72,7 +72,7 @@ watch(
 
 const submit = () => {
     form.post(route('match.calculate'), {
-        onFinish: () => form.reset(),
+        // onFinish: () => form.reset(),
         preserveScroll: true,
     });
     // Focusing on the Computed Div. This can be use after form onSuccess.
