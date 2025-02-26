@@ -125,7 +125,7 @@ class HomeMatchCalculatorController extends Controller
                 'date_of_birth' => $borrower->getBirthdate()->format('Y-m-d'),
                 'monthly_gross_income' => Arr::get($params, Input::WAGES),
                 'region' => $borrower->getRegional(),
-                'limit' => 3,
+                'limit' => 20,
                 'verbose' => 1
             ])
         ];
