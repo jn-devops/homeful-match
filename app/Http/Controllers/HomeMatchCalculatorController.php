@@ -36,7 +36,9 @@ class HomeMatchCalculatorController extends Controller
      */
     public function index(): Response
     {
-        return Inertia::render('Calculator');
+        return Inertia::render('Calculator', [
+            'mortgageVersion' => \Composer\InstalledVersions::getVersion('jn-devops/mortgage')        
+        ]);
     }
 
     /**
