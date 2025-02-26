@@ -166,19 +166,22 @@ const switchTab = (name) => {
                           placeholder="Enter TCP"
                           :error-message="form.errors.age"
                           type="number"
-                      />
-                        <Input
-                            v-model="form.tcp"
-                            label="TCP"
-                            placeholder="Enter TCP"
-                            :error-message="form.errors.tcp"
-                            type="number"
                         />
                         <Input
                             v-model="form.gmi"
                             label="Gross Monthly Income"
                             placeholder="Enter Gross Monthly Income"
                             :error-message="form.errors.gmi"
+                            type="number"
+                        />
+                    </div>
+                    <hr class="border-b-2 my-3">
+                    <div class="lg:grid lg:grid-cols-2 lg:gap-3 mb-5">
+                        <Input
+                            v-model="form.tcp"
+                            label="TCP"
+                            placeholder="Enter TCP"
+                            :error-message="form.errors.tcp"
                             type="number"
                         />
                         <Input
