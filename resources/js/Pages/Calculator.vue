@@ -312,135 +312,135 @@ const switchTab = (name) => {
                     <template v-else>
                         <h2 class="text-base/7 font-semibold text-gray-900 leading-none">{{ tabs.find(tab => tab.current).name  }}</h2>
                         <p class="mt-1 text-sm/6 text-gray-600 leading-none">This result has been generated using the HomeMatch Calculator for accurate assessment.</p>
-                        <p class="mt-5 font-bold">Barrower</p>
+                        <p class="mt-5 font-bold mb-2">Barrower</p>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Gross Monthly Income</h3>
-                                <div class="">₱ {{ formatNumber(computedData.borrower.gross_monthly_income) }}</div>
+                                <div class="">₱ {{ formatNumber(computedData.borrower?.gross_monthly_income) }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Regional</h3>
-                                <div class=""> {{ computedData.borrower.regional }}</div>
+                                <div class=""> {{ computedData.borrower?.regional }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Birth Date</h3>
-                                <div class=""> {{ computedData.borrower.birthdate }}</div>
+                                <div class=""> {{ computedData.borrower?.birthdate }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Age</h3>
-                                <div class=""> {{ computedData.borrower.age }}</div>
+                                <div class=""> {{ computedData.borrower?.age }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">As of</h3>
-                                <div class=""> {{ computedData.borrower.as_of_date }}</div>
+                                <div class=""> {{ computedData.borrower?.as_of_date }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Work Area</h3>
-                                <div class=""> {{ computedData.borrower.work_area }}</div>
+                                <div class=""> {{ computedData.borrower?.work_area }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Employment Type</h3>
-                                <div class=""> {{ computedData.borrower.employment_type }}</div>
+                                <div class=""> {{ computedData.borrower?.employment_type }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Formatted Age</h3>
-                                <div class=""> {{ computedData.borrower.formatted_age }}</div>
+                                <div class=""> {{ computedData.borrower?.formatted_age }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Payment Mode</h3>
-                                <div class=""> {{ computedData.borrower.payment_mode }}</div>
+                                <div class=""> {{ computedData.borrower?.payment_mode }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Maturity Date</h3>
-                                <div class=""> {{ computedData.borrower.maturity_date }}</div>
+                                <div class=""> {{ computedData.borrower?.maturity_date }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Age At Maturity Date</h3>
-                                <div class=""> {{ computedData.borrower.age_at_maturity_date }}</div>
+                                <div class=""> {{ computedData.borrower?.age_at_maturity_date }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Lending Institution Alias</h3>
-                                <div class=""> {{ computedData.borrower.lending_institution_alias }}</div>
+                                <div class=""> {{ computedData.borrower?.lending_institution_alias }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Lending Institution Name</h3>
-                                <div class=""> {{ computedData.borrower.lending_institution_name }}</div>
+                                <div class=""> {{ computedData.borrower?.lending_institution_name }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Maximum Term Allowed</h3>
-                                <div class=""> {{ computedData.borrower.maximum_term_allowed }}</div>
+                                <div class=""> {{ computedData.borrower?.maximum_term_allowed }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Repricing Frequency</h3>
-                                <div class=""> {{ computedData.borrower.repricing_frequency }}</div>
+                                <div class=""> {{ computedData.borrower?.repricing_frequency }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Interest_Rate</h3>
-                                <div class=""> {{ computedData.borrower.interest_rate }}</div>
+                                <div class=""> {{ computedData.borrower?.interest_rate }}</div>
                             </div>
                         </div>
 
-                        <p class="mt-5 font-bold">Property</p>
+                        <p class="mt-5 font-bold mb-2">Property</p>
                         <div class="grid grid-cols-2 md:grid-cols-3 gap-2">
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">SKU</h3>
-                                <div class=""> {{ computedData.property.sku }}</div>
+                                <div class=""> {{ computedData.property?.sku }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Market Segment</h3>
-                                <div class=""> {{ computedData.property.market_segment }}</div>
+                                <div class=""> {{ computedData.property?.market_segment }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Total Contract Price</h3>
-                                <div class="">₱ {{ formatNumber(computedData.property.total_contract_price) }}</div>
+                                <div class="">₱ {{ formatNumber(computedData.property?.total_contract_price) }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Appraised Value</h3>
-                                <div class="">₱ {{ formatNumber(computedData.property.appraised_value) }}</div>
+                                <div class="">₱ {{ formatNumber(computedData.property?.appraised_value) }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Default Loanable Value Multiplier</h3>
-                                <div class=""> {{ computedData.property.default_loanable_value_multiplier }}</div>
+                                <div class=""> {{ computedData.property?.default_loanable_value_multiplier }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Loanable Value Multiplier</h3>
-                                <div class=""> {{ computedData.property.loanable_value_multiplier }}</div>
+                                <div class=""> {{ computedData.property?.loanable_value_multiplier }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Loanable Value</h3>
-                                <div class=""> {{ computedData.property.loanable_value }}</div>
+                                <div class=""> {{ computedData.property?.loanable_value }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Disposable Income Requirement Multiplier</h3>
-                                <div class=""> {{ computedData.property.disposable_income_requirement_multiplier }}</div>
+                                <div class=""> {{ computedData.property?.disposable_income_requirement_multiplier }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Default Disposable Income Requirement Multiplier</h3>
-                                <div class=""> {{ computedData.property.default_disposable_income_requirement_multiplier }}</div>
+                                <div class=""> {{ computedData.property?.default_disposable_income_requirement_multiplier }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Work Area</h3>
-                                <div class=""> {{ computedData.property.work_area }}</div>
+                                <div class=""> {{ computedData.property?.work_area }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Development Type</h3>
-                                <div class=""> {{ computedData.property.development_type }}</div>
+                                <div class=""> {{ computedData.property?.development_type }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Housing Type</h3>
-                                <div class=""> {{ computedData.property.housing_type }}</div>
+                                <div class=""> {{ computedData.property?.housing_type }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Storeys</h3>
-                                <div class=""> {{ computedData.property.storeys }}</div>
+                                <div class=""> {{ computedData.property?.storeys }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Floor Area</h3>
-                                <div class=""> {{ computedData.property.floor_area }}</div>
+                                <div class=""> {{ computedData.property?.floor_area }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Price Ceiling</h3>
-                                <div class="">₱ {{ formatNumber(computedData.property.price_ceiling) }}</div>
+                                <div class="">₱ {{ formatNumber(computedData.property?.price_ceiling) }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Fees</h3>
@@ -448,11 +448,11 @@ const switchTab = (name) => {
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Fee Structure</h3>
-                                <div class=""> {{ computedData.property.fee_structure }}</div>
+                                <div class=""> {{ computedData.property?.fee_structure }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Selling Price</h3>
-                                <div class="">₱ {{ formatNumber(computedData.property.selling_price) }}</div>
+                                <div class="">₱ {{ formatNumber(computedData.property?.selling_price) }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Name</h3>
@@ -460,11 +460,11 @@ const switchTab = (name) => {
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Brand</h3>
-                                <div class=""> {{ computedData.property.brand }}</div>
+                                <div class=""> {{ computedData.property?.brand }}</div>
                             </div>
                             <div class="mb-5">
                                 <h3 class="font-semibold text-sm">Category</h3>
-                                <div class=""> {{ computedData.property.category }}</div>
+                                <div class=""> {{ computedData.property?.category }}</div>
                             </div>
                         </div>
                     </template>
