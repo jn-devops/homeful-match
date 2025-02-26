@@ -39,9 +39,9 @@ const computedData = ref({
 })
 
 const computedDiv = ref(null)
-
 const calculated_data = ref({});
 const calculated_properties = ref({});
+const raw_data = ref({});
 
 watch(
     () => usePage().props.flash.event,
@@ -50,6 +50,7 @@ watch(
             console.log('event1:', event?.data);
             calculated_data.value = event?.data.mortgage;
             calculated_properties.value = event?.data.properties;
+            raw_data.value.params = event?.data.params;
             
 
             // Update computedData via .value
@@ -138,6 +139,7 @@ const tabs = ref([
     { name: 'Computed', href: '#', current: true },
     { name: 'Other Details', href: '#', current: false },
     { name: 'Matches', href: '#', current: false },
+    { name: 'Raw Data', href: '#', current: false },
 ])
 
 const switchTab = (name) => {
@@ -315,6 +317,12 @@ const switchTab = (name) => {
                               <div class="">₱ {{ formatNumber(computedData.present_value_from_monthly_disposable_income) }}</div>
                             </div>
                         </div>
+                    </template>
+                    <template v-else-if="tabs.find(tab => tab.current).name == 'Raw Data'">
+                        PARAMS: <br>
+                        {{ raw_data.params }} <br>
+                        MORTGAGE: <br>
+                        {{ calculated_data }} <br>
                     </template>
                     <template v-else-if="tabs.find(tab => tab.current).name == 'Matches'">
                         <div class="flex flex-row flex-wrap mt-3">

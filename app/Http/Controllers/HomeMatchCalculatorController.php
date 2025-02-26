@@ -127,7 +127,8 @@ class HomeMatchCalculatorController extends Controller
                 'region' => $borrower->getRegional(),
                 'limit' => 20,
                 'verbose' => 1
-            ])
+            ]),
+            'params' => $params,
         ];
 
         return back()->with('event', [
