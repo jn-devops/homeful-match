@@ -41,13 +41,16 @@ const computedData = ref({
 const computedDiv = ref(null)
 
 const calculated_data = ref({});
+const calculated_properties = ref({});
 
 watch(
     () => usePage().props.flash.event,
     (event) => {
         if (event?.name === 'calculated') {
             console.log('event1:', event?.data);
-            calculated_data.value = event?.data;
+            calculated_data.value = event?.data.mortgage;
+            calculated_properties.value = event?.data.properties;
+            
 
             // Update computedData via .value
             computedData.value.downpayment = calculated_data.value['down_payment'];
@@ -134,6 +137,7 @@ const formatNumber = (value) => {
 const tabs = ref([
     { name: 'Computed', href: '#', current: true },
     { name: 'Other Details', href: '#', current: false },
+    { name: 'Matches', href: '#', current: false },
 ])
 
 const switchTab = (name) => {
@@ -306,6 +310,17 @@ const switchTab = (name) => {
                             <div class="mb-5">
                               <h3 class="font-semibold text-sm">PV from Disposable Income</h3>
                               <div class="">₱ {{ formatNumber(computedData.present_value_from_monthly_disposable_income) }}</div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else-if="tabs.find(tab => tab.current).name == 'Matches'">
+                        <div class="flex flex-row flex-wrap mt-3">
+                            <div class="basis-1/2 text-sm p-1" v-for="property in calculated_properties.matches" >
+                                <div class="border-2 rounded-lg p-2 px-4 h-full flex flex-col justify-center">
+                                    <h3>SKU: <span class="font-bold">{{ property.property.sku }}</span></h3>
+                                    <h3>NAME: <span class="font-bold">{{ property.property.name }}</span></h3>
+                                    <h3>TCP: <span class="font-bold">₱ {{ formatNumber(property.property.total_contract_price) }}</span></h3>
+                                </div>
                             </div>
                         </div>
                     </template>

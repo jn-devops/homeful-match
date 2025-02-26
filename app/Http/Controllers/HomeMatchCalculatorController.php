@@ -27,6 +27,7 @@ use Spatie\LaravelData\Attributes\Validation\In;
 use Whitecube\Price\Price;
 use Homeful\Mortgage\Data\MortgageData;
 use App\Actions\GetMortgage;
+use App\Actions\MatchProducts;
 
 class HomeMatchCalculatorController extends Controller
 {
@@ -118,7 +119,16 @@ class HomeMatchCalculatorController extends Controller
             ]);
         }
 
-        $data = GetMortgage::run($params);
+        $data = [
+            'mortgage' => GetMortgage::run($params),
+            'properties' => MatchProducts::run([
+                'date_of_birth' => $borrower->getBirthdate()->format('Y-m-d'),
+                'monthly_gross_income' => Arr::get($params, Input::WAGES),
+                'region' => $borrower->getRegional(),
+                'limit' => 3,
+                'verbose' => 1
+            ])
+        ];
 
         return back()->with('event', [
             'name' => 'calculated',
