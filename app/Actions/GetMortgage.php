@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use Homeful\Borrower\Borrower;
 use Lorisleiva\Actions\Concerns\AsAction;
 use Homeful\Mortgage\Data\MortgageData;
 use Lorisleiva\Actions\ActionRequest;
@@ -24,7 +25,11 @@ class GetMortgage
         ;
 
         $age = Arr::pull($validated, 'age');
-        $mortgage = Mortgage::createWithTypicalBorrower($property, $validated, $age);
+        $borrower = (new Borrower)
+            ->setGrossMonthlyIncome($validated[Input::WAGES])
+            ->setAge($age);
+
+        $mortgage = new Mortgage($property, $borrower, $validated);
 
         return MortgageData::fromObject($mortgage);
     }
@@ -49,7 +54,7 @@ class GetMortgage
     public function rules(): array
     {
         return [
-            'age' => ['nullable', 'numeric'],
+            'age' => ['required', 'numeric'],
             Input::WAGES => ['required', 'numeric'],
             Input::TCP => ['required', 'numeric'],
             Input::PERCENT_DP => ['required', 'numeric'],

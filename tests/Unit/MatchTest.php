@@ -8,7 +8,6 @@ use Illuminate\Support\Carbon;
 use Homeful\Mortgage\Mortgage;
 
 test('that true is true', function () {
-
     $monthly_gross_income = 60000;
     $date_of_birth = Carbon::parse('1999-03-17');
     $tcp = 2707500.0;
@@ -59,4 +58,20 @@ test('that true is true', function () {
     expect($mortgage->getLoan()->getMonthlyAmortization()->inclusive()->getAmount()->toFloat())->toBeLessThan($disposable_income);
     expect($mortgage->getLoan()->getIncomeRequirement()->getAmount()->toFloat())->toBeLessThan($monthly_gross_income);
     expect($mortgage->getLoanDifference()->inclusive()->getAmount()->toFloat())->toBeLessThan(0.0);
+})->skip();
+
+test('match works', function () {
+    $monthly_gross_income = 100000;
+    $date_of_birth = Carbon::parse('1999-03-17');
+    $tcp = 2707500.0;
+
+    $property = (new Property)
+        ->setTotalContractPrice($tcp)
+        ->setAppraisedValue($tcp *  0.95);
+
+    $borrower = (new Borrower($property))
+        ->setGrossMonthlyIncome($monthly_gross_income)
+        ->setBirthdate($date_of_birth);
+
+    expect($borrower->getMonthlyDisposableIncome()->inclusive()->getAmount()->toFloat())->dd();
 });
