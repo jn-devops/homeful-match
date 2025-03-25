@@ -2,6 +2,9 @@
 
 namespace App\Actions;
 
+use Homeful\Payment\Class\Term;
+use Homeful\Payment\Enums\Cycle;
+use Homeful\Payment\PresentValue;
 use Homeful\Borrower\Exceptions\{MaximumBorrowingAgeBreached, MinimumBorrowingAgeNotMet};
 use Brick\Math\Exception\{NumberFormatException, RoundingNecessaryException};
 use Brick\Money\Exception\UnknownCurrencyException;
@@ -131,7 +134,24 @@ class MatchProducts
      */
     protected function match(Mortgage $mortgage): bool
     {
-        return $mortgage->getJointBorrowerDisposableMonthlyIncome()->compareTo($mortgage->getLoan()->getMonthlyAmortization()) == Amount::GREATER_THAN;
+        $property = $mortgage->getProperty();
+        $borrower = $mortgage->getBorrower();
+
+        $disposable_income = $borrower->getMonthlyDisposableIncome()->inclusive()->getAmount()->toFloat();
+        $tern = $borrower->getMaximumTermAllowed();
+        $interest_rate = $property->getDefaultAnnualInterestRateFromBorrower($borrower);
+
+        $present_value = (new PresentValue)
+            ->setPayment($disposable_income)
+            ->setTerm(new Term($tern, Cycle::Yearly))
+            ->setInterestRate($interest_rate);
+        $value = $present_value->getDiscountedValue();
+
+        $tcp = $property->getTotalContractPrice()->inclusive()->getAmount()->toFloat();
+
+        return $value >= $tcp;
+
+//        return $mortgage->getJointBorrowerDisposableMonthlyIncome()->compareTo($mortgage->getLoan()->getMonthlyAmortization()) == Amount::GREATER_THAN;
     }
 
     /**
