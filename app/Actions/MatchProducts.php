@@ -2,9 +2,6 @@
 
 namespace App\Actions;
 
-use Homeful\Payment\Class\Term;
-use Homeful\Payment\Enums\Cycle;
-use Homeful\Payment\PresentValue;
 use Homeful\Borrower\Exceptions\{MaximumBorrowingAgeBreached, MinimumBorrowingAgeNotMet};
 use Brick\Math\Exception\{NumberFormatException, RoundingNecessaryException};
 use Brick\Money\Exception\UnknownCurrencyException;
@@ -12,6 +9,9 @@ use Lorisleiva\Actions\Concerns\AsAction;
 use Illuminate\Support\Facades\Cache;
 use Lorisleiva\Actions\ActionRequest;
 use Homeful\Common\Classes\Amount;
+use Homeful\Payment\PresentValue;
+use Homeful\Payment\Enums\Cycle;
+use Homeful\Payment\Class\Term;
 use Homeful\Borrower\Borrower;
 use Illuminate\Support\Carbon;
 use Homeful\Mortgage\Mortgage;
@@ -145,7 +145,7 @@ class MatchProducts
             ->setPayment($disposable_income)
             ->setTerm(new Term($tern, Cycle::Yearly))
             ->setInterestRate($interest_rate);
-        $value = $present_value->getDiscountedValue();
+        $value = $present_value->getDiscountedValue()->inclusive()->getAmount()->toFloat();
 
         $tcp = $property->getTotalContractPrice()->inclusive()->getAmount()->toFloat();
 
